@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TBoxType } from '../boxes';
+import { TBoxType } from '../assets/boxes';
 
 interface IConstructionState {
     items: TBoxType[];

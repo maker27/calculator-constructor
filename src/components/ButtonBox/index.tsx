@@ -2,6 +2,9 @@ import React from 'react';
 import './ButtonBox.scss';
 import { Button } from '../Button';
 import { combineClassnames } from '../../utils';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { operations } from '../../assets/constants';
 
 interface IButtonBoxProps {
     className?: string;
@@ -13,9 +16,10 @@ export const ButtonBox: React.FC<IButtonBoxProps> = ({ className = '', children 
 };
 
 export const DisplayBox: React.FC = () => {
+    const { display } = useSelector((state: RootState) => state.calculator);
     return (
         <ButtonBox className="box__display">
-            <Button label="0" className="button-display" />
+            <Button label={display} className="button-display" />
         </ButtonBox>
     );
 };
@@ -23,10 +27,11 @@ export const DisplayBox: React.FC = () => {
 export const OperationsBox: React.FC = () => {
     return (
         <ButtonBox className="box__operations">
-            <Button label="/" />
-            <Button label="х" />
-            <Button label="-" />
-            <Button label="+" />
+            {Object.keys(operations)
+                .filter(op => op !== '=')
+                .map(op => (
+                    <Button key={op} label={op} />
+                ))}
         </ButtonBox>
     );
 };
