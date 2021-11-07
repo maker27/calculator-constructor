@@ -1,0 +1,12 @@
+.sidebar {
+    width: 240px;
+}
+
+.box {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    &__inactive {
+        opacity: 0.5;
+    }
+}

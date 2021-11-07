@@ -1,0 +1,24 @@
+.button-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding: 4px;
+    background: #ffffff;
+}
+
+.box {
+    &__display {
+        height: 60px;
+    }
+    &__operations .button {
+        width: 52px;
+    }
+    &__digits {
+        height: 224px;
+    }
+    &__result {
+        height: 72px;
+    }
+}
