@@ -33,6 +33,14 @@ body {
     background: #ffffff;
     font: 500 14px/15px "Inter", sans-serif;
 
+    &.runtime-mode {
+        .aside {
+            visibility: hidden;
+        }
+        .main .button {
+            cursor: pointer;
+        }
+    }
     @media (max-width: 550px) {
         width: 100%;
         height: max-content;

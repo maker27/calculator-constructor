@@ -1,13 +1,35 @@
 import React from 'react';
 import './Switcher.scss';
+import { combineClassnames } from '../../utils';
 
-function Switcher(): React.ReactElement {
+interface ISwitcherProps {
+    constructorMode: boolean;
+    onToggleMode: (mode: boolean) => void;
+}
+
+const Switcher: React.FC<ISwitcherProps> = ({ constructorMode, onToggleMode }) => {
     return (
         <div className="switcher">
-            <div className="switcher__item icon-eye">Runtime</div>
-            <div className="switcher__item switcher__item__active icon-selector">Constructor</div>
+            <div
+                className={combineClassnames(
+                    'switcher__item',
+                    'icon-eye',
+                    constructorMode ? '' : 'switcher__item__active'
+                )}
+                onClick={() => onToggleMode(false)}>
+                Runtime
+            </div>
+            <div
+                className={combineClassnames(
+                    'switcher__item',
+                    'icon-selector',
+                    constructorMode ? 'switcher__item__active' : ''
+                )}
+                onClick={() => onToggleMode(true)}>
+                Constructor
+            </div>
         </div>
     );
-}
+};
 
 export default Switcher;

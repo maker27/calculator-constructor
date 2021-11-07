@@ -1,6 +1,7 @@
 import React from 'react';
 import './ButtonBox.scss';
 import { Button } from '../Button';
+import { combineClassnames } from '../../utils';
 
 interface IButtonBoxProps {
     className?: string;
@@ -8,7 +9,7 @@ interface IButtonBoxProps {
 }
 
 export const ButtonBox: React.FC<IButtonBoxProps> = ({ className = '', children }) => {
-    return <div className={'button-box ' + className}>{children}</div>;
+    return <div className={combineClassnames('button-box', className)}>{children}</div>;
 };
 
 export const DisplayBox: React.FC = () => {
@@ -58,7 +59,7 @@ interface IBoxProps {
 
 export const Box: React.FC<IBoxProps> = ({ Node, inactive, onClick }) => {
     return (
-        <div className={'box' + (inactive ? ' box__inactive' : '')} onClick={onClick}>
+        <div className={combineClassnames('box', inactive ? ' box__inactive' : '')} onClick={onClick}>
             <Node />
         </div>
     );

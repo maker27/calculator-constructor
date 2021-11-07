@@ -4,11 +4,13 @@ import boxes, { TBoxType } from '../../boxes';
 
 interface ICanvasProps {
     items: TBoxType[];
+    runtimeMode: boolean;
     onRemoveItem: (boxType: TBoxType) => void;
 }
 
-function Canvas({ items, onRemoveItem }: ICanvasProps): React.ReactElement {
+function Canvas({ items, runtimeMode, onRemoveItem }: ICanvasProps): React.ReactElement {
     const onDoubleClick = ({ target }: React.MouseEvent<HTMLElement>) => {
+        if (runtimeMode) return;
         const box = (target as HTMLElement).closest('.button-box');
         if (box) {
             const [, boxType] = box.className.match(/box__(\w+)/) || [];
@@ -19,7 +21,7 @@ function Canvas({ items, onRemoveItem }: ICanvasProps): React.ReactElement {
     return (
         <div
             className="canvas"
-            data-fulled={items.length === Object.keys(boxes).length}
+            data-fulled={runtimeMode || items.length === Object.keys(boxes).length}
             onDoubleClick={onDoubleClick}>
             {items.map((boxType: TBoxType) => {
                 const Box = boxes[boxType];
