@@ -1,7 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap");
+
 * {
     &,
     &:before,
     &:after {
         box-sizing: border-box;
     }
+}
+
+@font-face {
+    font-family: "icons";
+    src: url("./fonts/icons/icons.eot?wt6wkr");
+    src: url("./fonts/icons/icons.eot?wt6wkr#iefix") format("embedded-opentype"),
+        url("./fonts/icons/icons.ttf?wt6wkr") format("truetype"),
+        url("./fonts/icons/icons.woff?wt6wkr") format("woff"),
+        url("./fonts/icons/icons.svg?wt6wkr#icons") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: "icons" !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-eye:before {
+    content: "\e900";
+}
+.icon-selector:before {
+    content: "\e901";
 }
