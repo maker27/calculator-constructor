@@ -11,7 +11,7 @@ interface IButtonBoxProps {
     children: React.ReactNode;
 }
 
-export const ButtonBox: React.FC<IButtonBoxProps> = ({ className = '', children }) => {
+export const ButtonBox: React.FC<IButtonBoxProps> = ({ className, children }) => {
     return <div className={combineClassnames('button-box', className)}>{children}</div>;
 };
 

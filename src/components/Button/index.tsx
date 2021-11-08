@@ -7,6 +7,6 @@ interface IButtonProps {
     className?: string;
 }
 
-export const Button: React.FC<IButtonProps> = ({ label, className = '' }) => {
+export const Button: React.FC<IButtonProps> = ({ label, className }) => {
     return <div className={combineClassnames('button', className)}>{label}</div>;
 };

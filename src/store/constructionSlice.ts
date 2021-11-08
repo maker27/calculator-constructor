@@ -18,9 +18,8 @@ export const constructionSlice = createSlice({
         toggleMode: (state, action: PayloadAction<boolean>) => {
             state.mode = action.payload;
         },
-        addItem: (state, action: PayloadAction<TBoxType>) => {
-            const addedItem = action.payload;
-            if (!state.items.includes(addedItem)) state.items.push(addedItem);
+        setItems: (state, action: PayloadAction<TBoxType[]>) => {
+            state.items = action.payload;
         },
         removeItem: (state, action: PayloadAction<TBoxType>) => {
             const removedItem = action.payload;
@@ -30,6 +29,6 @@ export const constructionSlice = createSlice({
     }
 });
 
-export const { toggleMode, addItem, removeItem } = constructionSlice.actions;
+export const { toggleMode, setItems, removeItem } = constructionSlice.actions;
 
 export default constructionSlice.reducer;

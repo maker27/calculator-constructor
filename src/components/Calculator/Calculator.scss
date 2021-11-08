@@ -14,4 +14,7 @@
     &[data-fulled="true"]:after {
         display: none;
     }
+    &.droppable {
+        background: #dbeafe;
+    }
 }
