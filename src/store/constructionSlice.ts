@@ -6,7 +6,7 @@ interface IConstructionState {
     mode: boolean;
 }
 
-const initialState: IConstructionState = {
+export const initialState: IConstructionState = {
     items: [],
     mode: true
 };
