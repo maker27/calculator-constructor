@@ -4,7 +4,8 @@
   "scripts": {
     "start": "webpack serve --config webpack.dev.config.ts",
     "build": "webpack --config webpack.prod.config.ts",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "react": "^17.0.1",
@@ -37,6 +38,7 @@
     "eslint-webpack-plugin": "^2.4.1",
     "file-loader": "^6.2.0",
     "fork-ts-checker-webpack-plugin": "^6.0.8",
+    "gh-pages": "^3.2.3",
     "html-webpack-plugin": "^4.5.1",
     "jest": "^27.3.1",
     "mini-css-extract-plugin": "^2.1.0",
