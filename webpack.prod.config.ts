@@ -31,6 +31,15 @@ const config: webpack.Configuration = {
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
             },
             {
+                test: /\.(png|jpe?g|gif|webp|ico|svg)$/i,
+                exclude: path.resolve(__dirname, 'src/fonts'),
+                use: [
+                    {
+                        loader: 'file-loader'
+                    }
+                ]
+            },
+            {
                 test: /\.(ttf|eot|woff|woff2|svg)$/,
                 include: path.resolve(__dirname, 'src/fonts'),
                 use: {
@@ -40,14 +49,6 @@ const config: webpack.Configuration = {
                         outputPath: 'fonts/'
                     }
                 }
-            },
-            {
-                test: /\.(png|jpe?g|gif|webp|ico|svg)$/i,
-                use: [
-                    {
-                        loader: 'file-loader'
-                    }
-                ]
             }
         ]
     },
@@ -56,7 +57,8 @@ const config: webpack.Configuration = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'src/index.html',
+            favicon: 'src/images/icon.png'
         }),
         new MiniCssExtractPlugin(),
         new ForkTsCheckerWebpackPlugin({

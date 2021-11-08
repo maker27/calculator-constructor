@@ -1,0 +1,32 @@
+.switcher {
+    display: flex;
+    height: 38px;
+    background: #f3f4f6;
+    border-radius: 6px;
+
+    &__item {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: #4d5562;
+        cursor: pointer;
+        user-select: none;
+
+        &:before {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+    }
+
+    &__item__active {
+        background: #ffffff;
+        border: 1px solid #e2e3e5;
+
+        &:before {
+            color: #5d5fef;
+        }
+    }
+}
