@@ -16,10 +16,10 @@ export const ButtonBox: React.FC<IButtonBoxProps> = ({ className, children }) =>
 };
 
 export const DisplayBox: React.FC = () => {
-    const { display } = useSelector((state: RootState) => state.calculator);
+    const { display, displayMaxLength } = useSelector((state: RootState) => state.calculator);
     return (
         <ButtonBox className="box__display">
-            <Button label={display} className="button-display" />
+            <Button label={display.slice(0, displayMaxLength)} className="button-display" />
         </ButtonBox>
     );
 };

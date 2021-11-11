@@ -7,13 +7,15 @@ interface ICalculatorState {
     action: TOperation | null;
     lastAction: boolean;
     display: string;
+    displayMaxLength: number;
 }
 
 export const initialState: ICalculatorState = {
     lastNumber: 0,
     action: null,
     lastAction: false,
-    display: '0'
+    display: '0',
+    displayMaxLength: 10
 };
 
 export const calculatorSlice = createSlice({
