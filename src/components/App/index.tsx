@@ -8,9 +8,9 @@ import boxes, { TBoxType } from '../../assets/boxes';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setItems, toggleMode } from '../../store/constructionSlice';
-import { combineClassnames } from '../../utils';
 import { DragDropWrapper, DraggableWrapper, DroppableWrapper, TOnDragEndResult } from '../DragAndDrop';
 import { CALCULATOR_DROPPABLE_ID, SIDEBAR_DROPPABLE_ID } from '../../assets/constants';
+import classNames from 'classnames';
 
 function App(): React.ReactElement {
     const { items, mode: constructorMode } = useSelector((state: RootState) => state.construction);
@@ -41,7 +41,7 @@ function App(): React.ReactElement {
     };
 
     return (
-        <div className={combineClassnames('container', constructorMode ? '' : 'runtime-mode')}>
+        <div className={classNames('container', constructorMode ? '' : 'runtime-mode')}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
                 <DroppableWrapper
                     droppableId={SIDEBAR_DROPPABLE_ID}

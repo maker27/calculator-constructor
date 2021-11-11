@@ -1,6 +1,6 @@
 import React from 'react';
 import './Button.scss';
-import { combineClassnames } from '../../utils';
+import classNames from 'classnames';
 
 interface IButtonProps {
     label: string;
@@ -8,5 +8,5 @@ interface IButtonProps {
 }
 
 export const Button: React.FC<IButtonProps> = ({ label, className }) => {
-    return <div className={combineClassnames('button', className)}>{label}</div>;
+    return <div className={classNames('button', className)}>{label}</div>;
 };

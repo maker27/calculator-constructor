@@ -1,6 +1,6 @@
 import React from 'react';
 import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
-import { combineClassnames } from '../../utils';
+import classNames from 'classnames';
 
 interface IDroppableWrapperProps {
     droppableId: string;
@@ -23,7 +23,7 @@ const DroppableWrapper: React.FC<IDroppableWrapperProps> = ({
         <Droppable droppableId={droppableId} isDropDisabled={isDropDisabled}>
             {(provided: DroppableProvided, snapshot) => (
                 <div
-                    className={combineClassnames(className, snapshot.isDraggingOver && isDraggingClassname)}
+                    className={classNames(className, snapshot.isDraggingOver && isDraggingClassname)}
                     ref={provided.innerRef}
                     {...provided.droppableProps}>
                     {children}

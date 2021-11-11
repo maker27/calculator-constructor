@@ -1,10 +1,10 @@
 import React from 'react';
 import './ButtonBox.scss';
 import { Button } from '../Button';
-import { combineClassnames } from '../../utils';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { operations } from '../../assets/constants';
+import classNames from 'classnames';
 
 interface IButtonBoxProps {
     className?: string;
@@ -12,7 +12,7 @@ interface IButtonBoxProps {
 }
 
 export const ButtonBox: React.FC<IButtonBoxProps> = ({ className, children }) => {
-    return <div className={combineClassnames('button-box', className)}>{children}</div>;
+    return <div className={classNames('button-box', className)}>{children}</div>;
 };
 
 export const DisplayBox: React.FC = () => {
@@ -63,7 +63,7 @@ interface IBoxProps {
 
 export const Box: React.FC<IBoxProps> = ({ Node, inactive }) => {
     return (
-        <div className={combineClassnames('box', inactive ? 'box__inactive' : '')}>
+        <div className={classNames('box', inactive ? 'box__inactive' : '')}>
             <Node />
         </div>
     );
