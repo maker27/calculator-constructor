@@ -10,3 +10,7 @@ export const operations: IOperations = {
 };
 
 export const dot = '.';
+
+export const CALCULATOR_DROPPABLE_ID = 'calculator';
+
+export const SIDEBAR_DROPPABLE_ID = 'sidebar';

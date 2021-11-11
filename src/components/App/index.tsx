@@ -10,6 +10,7 @@ import { RootState } from '../../store';
 import { setItems, toggleMode } from '../../store/constructionSlice';
 import { combineClassnames } from '../../utils';
 import { DragDropWrapper, DraggableWrapper, DroppableWrapper, TOnDragEndResult } from '../DragAndDrop';
+import { CALCULATOR_DROPPABLE_ID, SIDEBAR_DROPPABLE_ID } from '../../assets/constants';
 
 function App(): React.ReactElement {
     const { items, mode: constructorMode } = useSelector((state: RootState) => state.construction);
@@ -18,12 +19,23 @@ function App(): React.ReactElement {
     const onSetItems = (items: TBoxType[]) => dispatch(setItems(items));
 
     const handleOnDragEnd = (result: TOnDragEndResult) => {
-        const { destination, draggableId } = result;
-        if (!destination) return;
+        const { destination, source, draggableId } = result;
+        if (!destination || !source || destination.droppableId !== CALCULATOR_DROPPABLE_ID) return;
+
         const boxType = draggableId as TBoxType;
-        if (destination.droppableId === 'calculator' && !items.includes(boxType)) {
+        const isMovingInCanvas = source.droppableId === CALCULATOR_DROPPABLE_ID;
+        if (!items.includes(boxType) || isMovingInCanvas) {
             const newItems = [...items];
+            if (isMovingInCanvas) newItems.splice(source.index, 1);
             newItems.splice(destination.index, 0, boxType);
+
+            const displayItem = 'display';
+            const displayPosition = newItems.indexOf(displayItem);
+            if (displayPosition > 0) {
+                newItems.splice(displayPosition, 1);
+                newItems.unshift(displayItem);
+            }
+
             onSetItems(newItems);
         }
     };
@@ -32,7 +44,7 @@ function App(): React.ReactElement {
         <div className={combineClassnames('container', constructorMode ? '' : 'runtime-mode')}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
                 <DroppableWrapper
-                    droppableId="sidebar"
+                    droppableId={SIDEBAR_DROPPABLE_ID}
                     className="aside"
                     isDropDisabled={true}
                     isPlaceholderDisabled={true}>

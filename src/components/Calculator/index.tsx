@@ -4,7 +4,7 @@ import boxes, { TBoxType } from '../../assets/boxes';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { removeItem } from '../../store/constructionSlice';
-import { operations } from '../../assets/constants';
+import { CALCULATOR_DROPPABLE_ID, operations } from '../../assets/constants';
 import { changeDisplay, operationAction } from '../../store/calculatorSlice';
 import { TOperation } from '../../assets/types';
 import { DraggableWrapper, DroppableWrapper } from '../DragAndDrop';
@@ -41,7 +41,10 @@ export default function Calculator(): React.ReactElement {
     };
 
     return (
-        <DroppableWrapper className="canvas" droppableId="calculator" isDraggingClassname="droppable">
+        <DroppableWrapper
+            className="canvas"
+            droppableId={CALCULATOR_DROPPABLE_ID}
+            isDraggingClassname="droppable">
             <div
                 className="canvas-container"
                 data-fulled={!constructorMode || items.length === Object.keys(boxes).length}
