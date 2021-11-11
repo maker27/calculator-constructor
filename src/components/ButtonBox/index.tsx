@@ -59,12 +59,11 @@ export const ResultBox: React.FC = () => {
 interface IBoxProps {
     Node: React.FC;
     inactive?: boolean;
-    onClick?: () => void;
 }
 
-export const Box: React.FC<IBoxProps> = ({ Node, inactive, onClick }) => {
+export const Box: React.FC<IBoxProps> = ({ Node, inactive }) => {
     return (
-        <div className={combineClassnames('box', inactive ? ' box__inactive' : '')} onClick={onClick}>
+        <div className={combineClassnames('box', inactive ? 'box__inactive' : '')}>
             <Node />
         </div>
     );

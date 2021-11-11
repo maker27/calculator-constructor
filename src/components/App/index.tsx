@@ -9,14 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setItems, toggleMode } from '../../store/constructionSlice';
 import { combineClassnames } from '../../utils';
-import {
-    DragDropContext,
-    Droppable,
-    Draggable,
-    DroppableProvided,
-    DraggableProvided,
-    DropResult
-} from 'react-beautiful-dnd';
+import { DragDropWrapper, DraggableWrapper, DroppableWrapper, TOnDragEndResult } from '../DragAndDrop';
 
 function App(): React.ReactElement {
     const { items, mode: constructorMode } = useSelector((state: RootState) => state.construction);
@@ -24,7 +17,7 @@ function App(): React.ReactElement {
     const onToggleMode = (mode: boolean) => dispatch(toggleMode(mode));
     const onSetItems = (items: TBoxType[]) => dispatch(setItems(items));
 
-    const handleOnDragEnd = (result: DropResult) => {
+    const handleOnDragEnd = (result: TOnDragEndResult) => {
         const { destination, draggableId } = result;
         if (!destination) return;
         const boxType = draggableId as TBoxType;
@@ -37,46 +30,35 @@ function App(): React.ReactElement {
 
     return (
         <div className={combineClassnames('container', constructorMode ? '' : 'runtime-mode')}>
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable droppableId="sidebar" isDropDisabled={true}>
-                    {(provided: DroppableProvided) => (
-                        <div className="aside" ref={provided.innerRef} {...provided.droppableProps}>
-                            <Sidebar>
-                                {Object.entries(boxes).map(([type, Node], index) => {
-                                    const boxType = type as TBoxType;
-                                    const inactive = items.includes(boxType);
-                                    return (
-                                        <Draggable
-                                            key={type}
-                                            draggableId={inactive ? type + '-inactive' : type}
-                                            index={index}
-                                            isDragDisabled={inactive}>
-                                            {(draggableProvided: DraggableProvided, snapshot) => (
-                                                <React.Fragment>
-                                                    <div
-                                                        ref={draggableProvided.innerRef}
-                                                        {...draggableProvided.draggableProps}
-                                                        {...draggableProvided.dragHandleProps}
-                                                        className={snapshot.isDragging ? 'dragging' : ''}>
-                                                        <Box key={type} Node={Node} inactive={inactive} />
-                                                    </div>
-                                                    {snapshot.isDragging && (
-                                                        <Box key={type} Node={Node} inactive={true} />
-                                                    )}
-                                                </React.Fragment>
-                                            )}
-                                        </Draggable>
-                                    );
-                                })}
-                            </Sidebar>
-                        </div>
-                    )}
-                </Droppable>
+            <DragDropWrapper onDragEnd={handleOnDragEnd}>
+                <DroppableWrapper
+                    droppableId="sidebar"
+                    className="aside"
+                    isDropDisabled={true}
+                    isPlaceholderDisabled={true}>
+                    <Sidebar>
+                        {Object.entries(boxes).map(([type, Node], index) => {
+                            const boxType = type as TBoxType;
+                            const inactive = items.includes(boxType);
+                            return (
+                                <DraggableWrapper
+                                    key={type}
+                                    draggableId={inactive ? type + '-inactive' : type}
+                                    index={index}
+                                    isDragDisabled={inactive}
+                                    isDraggingClassname="dragging"
+                                    isDraggableClassname="box__inactive">
+                                    <Box key={type} Node={Node} inactive={inactive} />
+                                </DraggableWrapper>
+                            );
+                        })}
+                    </Sidebar>
+                </DroppableWrapper>
                 <div className="main">
                     <Switcher constructorMode={constructorMode} onToggleMode={onToggleMode} />
                     <Calculator />
                 </div>
-            </DragDropContext>
+            </DragDropWrapper>
         </div>
     );
 }

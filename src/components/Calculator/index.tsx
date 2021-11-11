@@ -7,8 +7,7 @@ import { removeItem } from '../../store/constructionSlice';
 import { operations } from '../../assets/constants';
 import { changeDisplay, operationAction } from '../../store/calculatorSlice';
 import { TOperation } from '../../assets/types';
-import { Draggable, DraggableProvided, Droppable } from 'react-beautiful-dnd';
-import { combineClassnames } from '../../utils';
+import { DraggableWrapper, DroppableWrapper } from '../DragAndDrop';
 
 export default function Calculator(): React.ReactElement {
     const { items, mode: constructorMode } = useSelector((state: RootState) => state.construction);
@@ -42,37 +41,21 @@ export default function Calculator(): React.ReactElement {
     };
 
     return (
-        <Droppable droppableId="calculator">
-            {(provided, snapshot) => (
-                <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    className={combineClassnames('canvas', snapshot.isDraggingOver ? 'droppable' : '')}
-                    data-fulled={!constructorMode || items.length === Object.keys(boxes).length}
-                    onClick={onClick}
-                    onDoubleClick={onDoubleClick}>
-                    {items.map((boxType: TBoxType, index) => {
-                        const Box = boxes[boxType];
-                        return (
-                            <Draggable
-                                key={boxType}
-                                draggableId={boxType}
-                                index={index}
-                                isDragDisabled={true}>
-                                {(draggableProvided: DraggableProvided) => (
-                                    <div
-                                        ref={draggableProvided.innerRef}
-                                        {...draggableProvided.draggableProps}
-                                        {...draggableProvided.dragHandleProps}>
-                                        <Box key={boxType} />
-                                    </div>
-                                )}
-                            </Draggable>
-                        );
-                    })}
-                    {provided.placeholder}
-                </div>
-            )}
-        </Droppable>
+        <DroppableWrapper className="canvas" droppableId="calculator" isDraggingClassname="droppable">
+            <div
+                className="canvas-container"
+                data-fulled={!constructorMode || items.length === Object.keys(boxes).length}
+                onClick={onClick}
+                onDoubleClick={onDoubleClick}>
+                {items.map((boxType: TBoxType, index) => {
+                    const Box = boxes[boxType];
+                    return (
+                        <DraggableWrapper key={boxType} draggableId={boxType} index={index}>
+                            <Box key={boxType} />
+                        </DraggableWrapper>
+                    );
+                })}
+            </div>
+        </DroppableWrapper>
     );
 }

@@ -25,4 +25,8 @@
 
 .dragging {
     opacity: 0.7;
+
+    ~ div {
+        transform: none !important;
+    }
 }

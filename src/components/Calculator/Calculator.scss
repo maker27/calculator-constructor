@@ -1,20 +1,24 @@
 .canvas {
-    display: flex;
-    flex-direction: column;
     height: 444px;
 
-    &:after {
-        content: "";
-        flex: 1 1 100%;
-        border: 2px dashed #c4c4c4;
-        border-radius: 6px;
-        background: url(../../images/drag-and-drop.png) center no-repeat;
-    }
-
-    &[data-fulled="true"]:after {
-        display: none;
-    }
     &.droppable {
         background: #dbeafe;
+    }
+    &-container {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+
+        &:after {
+            content: "";
+            flex: 1 1 100%;
+            border: 2px dashed #c4c4c4;
+            border-radius: 6px;
+            background: url(../../images/drag-and-drop.png) center no-repeat;
+        }
+
+        &[data-fulled="true"]:after {
+            display: none;
+        }
     }
 }
