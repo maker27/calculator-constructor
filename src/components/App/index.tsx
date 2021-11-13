@@ -1,15 +1,14 @@
 import React from 'react';
 import './App.scss';
 import { Sidebar } from '../Sidebar';
-import { Box } from '../ButtonBox';
 import Switcher from '../Switcher';
 import Calculator from '../Calculator';
-import boxes, { TBoxType } from '../../assets/boxes';
+import { TBoxType } from '../../assets/boxes';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { setItems, toggleMode } from '../../store/constructionSlice';
-import { DragDropWrapper, DraggableWrapper, DroppableWrapper, TOnDragEndResult } from '../DragAndDrop';
-import { CALCULATOR_DROPPABLE_ID, SIDEBAR_DROPPABLE_ID } from '../../assets/constants';
+import { DragDropWrapper, TOnDragEndResult } from '../DragAndDrop';
+import { CALCULATOR_DROPPABLE_ID } from '../../assets/constants';
 import classNames from 'classnames';
 import { Mode } from '../../assets/types';
 
@@ -44,29 +43,9 @@ function App(): React.ReactElement {
     return (
         <div className={classNames('container', { container_mode_runtime: mode === Mode.runtime })}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
-                <DroppableWrapper
-                    droppableId={SIDEBAR_DROPPABLE_ID}
-                    className="aside"
-                    isDropDisabled={true}
-                    isPlaceholderDisabled={true}>
-                    <Sidebar>
-                        {Object.entries(boxes).map(([type, Node], index) => {
-                            const boxType = type as TBoxType;
-                            const inactive = items.includes(boxType);
-                            return (
-                                <DraggableWrapper
-                                    key={type}
-                                    draggableId={inactive ? type + '-inactive' : type}
-                                    index={index}
-                                    isDragDisabled={inactive}
-                                    isDraggingClassname="box_dragging"
-                                    isDraggableClassname="box_inactive">
-                                    <Box key={type} Node={Node} inactive={inactive} />
-                                </DraggableWrapper>
-                            );
-                        })}
-                    </Sidebar>
-                </DroppableWrapper>
+                <div className="aside">
+                    <Sidebar items={items} />
+                </div>
                 <div className="main">
                     <Switcher mode={mode} onToggleMode={onToggleMode} />
                     <Calculator />
