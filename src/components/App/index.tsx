@@ -11,11 +11,12 @@ import { setItems, toggleMode } from '../../store/constructionSlice';
 import { DragDropWrapper, DraggableWrapper, DroppableWrapper, TOnDragEndResult } from '../DragAndDrop';
 import { CALCULATOR_DROPPABLE_ID, SIDEBAR_DROPPABLE_ID } from '../../assets/constants';
 import classNames from 'classnames';
+import { Mode } from '../../assets/types';
 
 function App(): React.ReactElement {
-    const { items, mode: constructorMode } = useSelector((state: RootState) => state.construction);
+    const { items, mode } = useSelector((state: RootState) => state.construction);
     const dispatch = useDispatch();
-    const onToggleMode = (mode: boolean) => dispatch(toggleMode(mode));
+    const onToggleMode = (mode: Mode) => dispatch(toggleMode(mode));
     const onSetItems = (items: TBoxType[]) => dispatch(setItems(items));
 
     const handleOnDragEnd = (result: TOnDragEndResult) => {
@@ -41,7 +42,7 @@ function App(): React.ReactElement {
     };
 
     return (
-        <div className={classNames('container', constructorMode ? '' : 'runtime-mode')}>
+        <div className={classNames('container', mode === Mode.runtime && 'runtime-mode')}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
                 <DroppableWrapper
                     droppableId={SIDEBAR_DROPPABLE_ID}
@@ -67,7 +68,7 @@ function App(): React.ReactElement {
                     </Sidebar>
                 </DroppableWrapper>
                 <div className="main">
-                    <Switcher constructorMode={constructorMode} onToggleMode={onToggleMode} />
+                    <Switcher mode={mode} onToggleMode={onToggleMode} />
                     <Calculator />
                 </div>
             </DragDropWrapper>

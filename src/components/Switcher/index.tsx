@@ -1,31 +1,32 @@
 import React from 'react';
 import './Switcher.scss';
 import classNames from 'classnames';
+import { Mode } from '../../assets/types';
 
 interface ISwitcherProps {
-    constructorMode: boolean;
-    onToggleMode: (mode: boolean) => void;
+    mode: Mode;
+    onToggleMode: (mode: Mode) => void;
 }
 
-const Switcher: React.FC<ISwitcherProps> = ({ constructorMode, onToggleMode }) => {
+const Switcher: React.FC<ISwitcherProps> = ({ mode, onToggleMode }) => {
     return (
         <div className="switcher">
             <div
                 className={classNames(
                     'switcher__item',
                     'icon-eye',
-                    constructorMode ? '' : 'switcher__item__active'
+                    mode === Mode.runtime && 'switcher__item__active'
                 )}
-                onClick={() => onToggleMode(false)}>
+                onClick={() => onToggleMode(Mode.constructor)}>
                 Runtime
             </div>
             <div
                 className={classNames(
                     'switcher__item',
                     'icon-selector',
-                    constructorMode ? 'switcher__item__active' : ''
+                    mode === Mode.constructor && 'switcher__item__active'
                 )}
-                onClick={() => onToggleMode(true)}>
+                onClick={() => onToggleMode(Mode.runtime)}>
                 Constructor
             </div>
         </div>

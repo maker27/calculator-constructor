@@ -1,12 +1,10 @@
-type TOperationFunction = ((a: number, b: number) => number) | null;
+type TBinaryOperator = (a: number, b: number) => number;
 
-export interface IOperations {
-    '/': TOperationFunction;
-    // prettier-ignore
-    'х': TOperationFunction;
-    '-': TOperationFunction;
-    '+': TOperationFunction;
-    '=': TOperationFunction;
+export type TOperation = '/' | 'х' | '-' | '+' | '=';
+
+export type TOperationActions = Record<TOperation, TBinaryOperator | null>;
+
+export enum Mode {
+    constructor,
+    runtime
 }
-
-export type TOperation = keyof IOperations;

@@ -1,6 +1,6 @@
-import { IOperations } from './types';
+import { TOperationActions } from './types';
 
-export const operations: IOperations = {
+export const operations: TOperationActions = {
     '/': (a, b) => a / b,
     // prettier-ignore
     'х': (a, b) => a * b,

@@ -1,21 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TBoxType } from '../assets/boxes';
+import { Mode } from '../assets/types';
 
 interface IConstructionState {
     items: TBoxType[];
-    mode: boolean;
+    mode: Mode;
 }
 
 export const initialState: IConstructionState = {
     items: [],
-    mode: true
+    mode: Mode.constructor
 };
 
 export const constructionSlice = createSlice({
     name: 'construction',
     initialState,
     reducers: {
-        toggleMode: (state, action: PayloadAction<boolean>) => {
+        toggleMode: (state, action: PayloadAction<Mode>) => {
             state.mode = action.payload;
         },
         setItems: (state, action: PayloadAction<TBoxType[]>) => {
