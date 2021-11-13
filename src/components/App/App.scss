@@ -33,7 +33,7 @@ body {
     background: #ffffff;
     font: 500 14px/15px "Inter", sans-serif;
 
-    &.runtime-mode {
+    &_mode_runtime {
         .aside {
             visibility: hidden;
         }

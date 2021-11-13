@@ -15,18 +15,18 @@ const Switcher: React.FC<ISwitcherProps> = ({ mode, onToggleMode }) => {
                 className={classNames(
                     'switcher__item',
                     'icon-eye',
-                    mode === Mode.runtime && 'switcher__item__active'
+                    mode === Mode.runtime && 'switcher__item_active'
                 )}
-                onClick={() => onToggleMode(Mode.constructor)}>
+                onClick={() => onToggleMode(Mode.runtime)}>
                 Runtime
             </div>
             <div
                 className={classNames(
                     'switcher__item',
                     'icon-selector',
-                    mode === Mode.constructor && 'switcher__item__active'
+                    mode === Mode.constructor && 'switcher__item_active'
                 )}
-                onClick={() => onToggleMode(Mode.runtime)}>
+                onClick={() => onToggleMode(Mode.constructor)}>
                 Constructor
             </div>
         </div>

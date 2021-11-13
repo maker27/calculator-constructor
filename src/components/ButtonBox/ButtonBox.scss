@@ -3,30 +3,38 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
+    margin-bottom: 12px;
     padding: 4px;
     background: #ffffff;
 }
 
 .box {
-    &__display {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+    &-display {
         height: 60px;
     }
-    &__operations .button {
+    &-operations .button {
         width: 52px;
     }
-    &__digits {
+    &-digits {
         height: 224px;
     }
-    &__result {
+    &-result {
         height: 72px;
     }
-}
 
-.dragging {
-    opacity: 0.7;
+    &_inactive {
+        opacity: 0.5;
+        pointer-events: none;
+    }
 
-    ~ div {
-        transform: none !important;
+    &_dragging {
+        opacity: 0.7;
+
+        ~ div {
+            transform: none !important;
+        }
     }
 }

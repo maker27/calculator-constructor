@@ -37,7 +37,7 @@ export default function Calculator(): React.ReactElement {
         if (isRuntimeMode) return;
         const box = (target as HTMLElement).closest('.button-box');
         if (box) {
-            const [, boxType] = box.className.match(/box__(\w+)/) || [];
+            const [, boxType] = box.className.match(/box-(\w+)/) || [];
             onRemoveItem(boxType as TBoxType);
         }
     };
@@ -46,9 +46,9 @@ export default function Calculator(): React.ReactElement {
         <DroppableWrapper
             className="canvas"
             droppableId={CALCULATOR_DROPPABLE_ID}
-            isDraggingClassname="droppable">
+            isDraggingClassname="canvas_droppable">
             <div
-                className="canvas-container"
+                className="canvas__container"
                 data-fulled={isRuntimeMode || items.length === Object.keys(boxes).length}
                 onClick={onClick}
                 onDoubleClick={onDoubleClick}>

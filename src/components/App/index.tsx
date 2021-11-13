@@ -42,7 +42,7 @@ function App(): React.ReactElement {
     };
 
     return (
-        <div className={classNames('container', mode === Mode.runtime && 'runtime-mode')}>
+        <div className={classNames('container', { container_mode_runtime: mode === Mode.runtime })}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
                 <DroppableWrapper
                     droppableId={SIDEBAR_DROPPABLE_ID}
@@ -59,8 +59,8 @@ function App(): React.ReactElement {
                                     draggableId={inactive ? type + '-inactive' : type}
                                     index={index}
                                     isDragDisabled={inactive}
-                                    isDraggingClassname="dragging"
-                                    isDraggableClassname="box__inactive">
+                                    isDraggingClassname="box_dragging"
+                                    isDraggableClassname="box_inactive">
                                     <Box key={type} Node={Node} inactive={inactive} />
                                 </DraggableWrapper>
                             );

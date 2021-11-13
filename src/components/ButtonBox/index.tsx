@@ -18,7 +18,7 @@ export const ButtonBox: React.FC<IButtonBoxProps> = ({ className, children }) =>
 export const DisplayBox: React.FC = () => {
     const { display, displayMaxLength } = useSelector((state: RootState) => state.calculator);
     return (
-        <ButtonBox className="box__display">
+        <ButtonBox className="box-display">
             <Button label={display.slice(0, displayMaxLength)} className="button-display" />
         </ButtonBox>
     );
@@ -26,7 +26,7 @@ export const DisplayBox: React.FC = () => {
 
 export const OperationsBox: React.FC = () => {
     return (
-        <ButtonBox className="box__operations">
+        <ButtonBox className="box-operations">
             {Object.keys(operations)
                 .filter(op => op !== '=')
                 .map(op => (
@@ -38,7 +38,7 @@ export const OperationsBox: React.FC = () => {
 
 export const DigitsBox: React.FC = () => {
     return (
-        <ButtonBox className="box__digits">
+        <ButtonBox className="box-digits">
             {[7, 8, 9, 4, 5, 6, 1, 2, 3].map((digit: number) => (
                 <Button key={digit} label={digit.toString()} />
             ))}
@@ -50,7 +50,7 @@ export const DigitsBox: React.FC = () => {
 
 export const ResultBox: React.FC = () => {
     return (
-        <ButtonBox className="box__result">
+        <ButtonBox className="box-result">
             <Button label="=" className="button-result" />
         </ButtonBox>
     );
@@ -63,7 +63,7 @@ interface IBoxProps {
 
 export const Box: React.FC<IBoxProps> = ({ Node, inactive }) => {
     return (
-        <div className={classNames('box', inactive ? 'box__inactive' : '')}>
+        <div className={classNames('box', inactive ? 'box_inactive' : '')}>
             <Node />
         </div>
     );
