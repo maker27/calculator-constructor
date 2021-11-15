@@ -1,0 +1,6 @@
+export const TOGGLE_MODE = 'TOGGLE_MODE';
+export const SET_ITEMS = 'SET_ITEMS';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+
+export const CHANGE_DISPLAY = 'CHANGE_DISPLAY';
+export const OPERATION_ACTION = 'OPERATION_ACTION';

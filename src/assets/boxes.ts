@@ -1,4 +1,7 @@
-import { DigitsBox, DisplayBox, OperationsBox, ResultBox } from '../components/ButtonBox';
+import OperationsBox from '../components/ButtonBox/OperationBox';
+import DigitsBox from '../components/ButtonBox/DigitsBox';
+import ResultBox from '../components/ButtonBox/ResultBox';
+import DisplayBox from '../containers/DisplayBox';
 
 const boxes = {
     display: DisplayBox,

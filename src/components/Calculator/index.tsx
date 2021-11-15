@@ -1,21 +1,25 @@
 import React from 'react';
 import './Calculator.scss';
 import boxes, { TBoxType } from '../../assets/boxes';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { removeItem } from '../../store/constructionSlice';
 import { CALCULATOR_DROPPABLE_ID, operations } from '../../assets/constants';
-import { changeDisplay, operationAction } from '../../store/calculatorSlice';
 import { Mode, TOperation } from '../../assets/types';
 import { DraggableWrapper, DroppableWrapper } from '../DragAndDrop';
 
-export default function Calculator(): React.ReactElement {
-    const { items, mode } = useSelector((state: RootState) => state.construction);
-    const dispatch = useDispatch();
-    const onRemoveItem = (item: TBoxType) => dispatch(removeItem(item));
-    const onOperationAction = (action: TOperation) => dispatch(operationAction(action));
-    const onChangeDisplay = (value: string) => dispatch(changeDisplay(value));
+interface ICalculatorProps {
+    items: TBoxType[];
+    mode: Mode;
+    removeItem: (item: TBoxType) => void;
+    operationAction: (action: TOperation) => void;
+    changeDisplay: (display: string) => void;
+}
 
+const Calculator: React.FC<ICalculatorProps> = ({
+    items,
+    mode,
+    removeItem,
+    operationAction,
+    changeDisplay
+}) => {
     const isRuntimeMode = mode === Mode.runtime;
 
     const onClick = ({ target }: React.MouseEvent<HTMLElement>) => {
@@ -25,9 +29,9 @@ export default function Calculator(): React.ReactElement {
             const value = button.textContent;
             if (value) {
                 if (value in operations) {
-                    onOperationAction(value as TOperation);
+                    operationAction(value as TOperation);
                 } else {
-                    onChangeDisplay(value);
+                    changeDisplay(value);
                 }
             }
         }
@@ -38,7 +42,7 @@ export default function Calculator(): React.ReactElement {
         const box = (target as HTMLElement).closest('.button-box');
         if (box) {
             const [, boxType] = box.className.match(/box-(\w+)/) || [];
-            onRemoveItem(boxType as TBoxType);
+            removeItem(boxType as TBoxType);
         }
     };
 
@@ -52,15 +56,17 @@ export default function Calculator(): React.ReactElement {
                 data-fulled={isRuntimeMode || items.length === Object.keys(boxes).length}
                 onClick={onClick}
                 onDoubleClick={onDoubleClick}>
-                {items.map((boxType: TBoxType, index) => {
+                {items.map((boxType: TBoxType, index: number) => {
                     const Box = boxes[boxType];
                     return (
                         <DraggableWrapper key={boxType} draggableId={boxType} index={index}>
-                            <Box key={boxType} />
+                            <Box />
                         </DraggableWrapper>
                     );
                 })}
             </div>
         </DroppableWrapper>
     );
-}
+};
+
+export default Calculator;

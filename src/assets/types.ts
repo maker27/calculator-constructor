@@ -8,3 +8,5 @@ export enum Mode {
     constructor,
     runtime
 }
+
+export type TReducer<S, A> = (prevState: S, action: A) => S;

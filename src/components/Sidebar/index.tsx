@@ -27,7 +27,9 @@ export const Sidebar: React.FC<ISidebarProps> = ({ items }) => {
                         isDragDisabled={inactive}
                         isDraggingClassname="box_dragging"
                         isDraggableClassname="box_inactive">
-                        <Box key={type} Node={Node} inactive={inactive} />
+                        <Box key={type} inactive={inactive}>
+                            <Node />
+                        </Box>
                     </DraggableWrapper>
                 );
             })}

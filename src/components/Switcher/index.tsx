@@ -5,10 +5,10 @@ import { Mode } from '../../assets/types';
 
 interface ISwitcherProps {
     mode: Mode;
-    onToggleMode: (mode: Mode) => void;
+    toggleMode: (mode: Mode) => void;
 }
 
-const Switcher: React.FC<ISwitcherProps> = ({ mode, onToggleMode }) => {
+const Switcher: React.FC<ISwitcherProps> = ({ mode, toggleMode }) => {
     return (
         <div className="switcher">
             <div
@@ -17,7 +17,7 @@ const Switcher: React.FC<ISwitcherProps> = ({ mode, onToggleMode }) => {
                     'icon-eye',
                     mode === Mode.runtime && 'switcher__item_active'
                 )}
-                onClick={() => onToggleMode(Mode.runtime)}>
+                onClick={() => toggleMode(Mode.runtime)}>
                 Runtime
             </div>
             <div
@@ -26,7 +26,7 @@ const Switcher: React.FC<ISwitcherProps> = ({ mode, onToggleMode }) => {
                     'icon-selector',
                     mode === Mode.constructor && 'switcher__item_active'
                 )}
-                onClick={() => onToggleMode(Mode.constructor)}>
+                onClick={() => toggleMode(Mode.constructor)}>
                 Constructor
             </div>
         </div>
