@@ -1,23 +1,21 @@
 import React from 'react';
 import './App.scss';
-import { Sidebar } from '../Sidebar';
-import Switcher from '../Switcher';
-import Calculator from '../Calculator';
+import Sidebar from '../../containers/Sidebar';
+import Switcher from '../../containers/Switcher';
+import Calculator from '../../containers/Calculator';
 import { TBoxType } from '../../assets/boxes';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { setItems, toggleMode } from '../../store/constructionSlice';
 import { DragDropWrapper, TOnDragEndResult } from '../DragAndDrop';
 import { CALCULATOR_DROPPABLE_ID } from '../../assets/constants';
 import classNames from 'classnames';
 import { Mode } from '../../assets/types';
 
-function App(): React.ReactElement {
-    const { items, mode } = useSelector((state: RootState) => state.construction);
-    const dispatch = useDispatch();
-    const onToggleMode = (mode: Mode) => dispatch(toggleMode(mode));
-    const onSetItems = (items: TBoxType[]) => dispatch(setItems(items));
+interface IAppProps {
+    items: TBoxType[];
+    mode: Mode;
+    setItems: (items: TBoxType[]) => void;
+}
 
+const App: React.FC<IAppProps> = ({ items, mode, setItems }) => {
     const handleOnDragEnd = (result: TOnDragEndResult) => {
         const { destination, source, draggableId } = result;
         if (!destination || !source || destination.droppableId !== CALCULATOR_DROPPABLE_ID) return;
@@ -36,7 +34,7 @@ function App(): React.ReactElement {
                 newItems.unshift(displayItem);
             }
 
-            onSetItems(newItems);
+            setItems(newItems);
         }
     };
 
@@ -44,15 +42,15 @@ function App(): React.ReactElement {
         <div className={classNames('container', { container_mode_runtime: mode === Mode.runtime })}>
             <DragDropWrapper onDragEnd={handleOnDragEnd}>
                 <div className="aside">
-                    <Sidebar items={items} />
+                    <Sidebar />
                 </div>
                 <div className="main">
-                    <Switcher mode={mode} onToggleMode={onToggleMode} />
+                    <Switcher />
                     <Calculator />
                 </div>
             </DragDropWrapper>
         </div>
     );
-}
+};
 
 export default App;
