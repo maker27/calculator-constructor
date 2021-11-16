@@ -1,10 +1,7 @@
-import calculatorReducer, {
-    initialState,
-    changeDisplay,
-    operationAction
-} from '../src/store/calculatorSlice';
+import { changeDisplay, operationAction } from '../src/actions';
 import { dot, operations } from '../src/assets/constants';
 import { TOperation } from '../src/assets/types';
+import { calculatorReducer, initialState } from '../src/reducers/calculator-reducer';
 
 describe('calculatorReducer', () => {
     const testDigit = '8';

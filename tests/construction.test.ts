@@ -1,11 +1,8 @@
-import { store } from '../src/store';
-import constructionReducer, {
-    initialState,
-    removeItem,
-    setItems,
-    toggleMode
-} from '../src/store/constructionSlice';
+import { removeItem, setItems, toggleMode } from '../src/actions';
 import { TBoxType } from '../src/assets/boxes';
+import { constructionReducer, IConstructionState, initialState } from '../src/reducers/construction-reducer';
+import store from '../src/store';
+import { Mode } from '../src/assets/types';
 
 describe('constructorReducer', () => {
     const boxes: TBoxType[] = ['display', 'operations', 'digits', 'result'];
@@ -16,10 +13,10 @@ describe('constructorReducer', () => {
     });
 
     test('toggle mode to runtime', () => {
-        const updatedState = constructionReducer(initialState, toggleMode(false));
+        const updatedState = constructionReducer(initialState, toggleMode(Mode.runtime));
         expect(updatedState).toEqual({
             ...initialState,
-            mode: false
+            mode: Mode.runtime
         });
     });
 
@@ -41,8 +38,8 @@ describe('constructorReducer', () => {
     });
 
     test('check default construction mode and empty boxes', () => {
-        const state = store.getState().construction;
+        const state: IConstructionState = store.getState().construction;
         expect(state.items).toEqual([]);
-        expect(state.mode).toBeTruthy();
+        expect(state.mode).toBe(Mode.constructor);
     });
 });

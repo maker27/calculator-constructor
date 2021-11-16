@@ -3,7 +3,7 @@ import { TBoxType } from '../assets/boxes';
 import { Mode, TReducer } from '../assets/types';
 import { AnyAction } from 'redux';
 
-interface IConstructionState {
+export interface IConstructionState {
     items: TBoxType[];
     mode: Mode;
 }
