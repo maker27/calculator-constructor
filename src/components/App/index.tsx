@@ -3,10 +3,10 @@ import './App.scss';
 import { Sidebar } from '../Sidebar';
 import { Calculator, Switcher } from '../../containers';
 import { TBoxType } from '../../assets/boxes';
-import { DragDropWrapper, TOnDragEndResult } from '../DragAndDrop';
-import { CALCULATOR_DROPPABLE_ID } from '../../assets/constants';
+import { DragDropWrapper } from '../DragAndDrop';
 import classNames from 'classnames';
 import { Mode } from '../../assets/types';
+import useDragAndDrop from '../../hooks/useDragAndDrop';
 
 interface IAppProps {
     items: TBoxType[];
@@ -15,31 +15,11 @@ interface IAppProps {
 }
 
 const App: React.FC<IAppProps> = ({ items, mode, setItems }) => {
-    const handleOnDragEnd = (result: TOnDragEndResult) => {
-        const { destination, source, draggableId } = result;
-        if (!destination || !source || destination.droppableId !== CALCULATOR_DROPPABLE_ID) return;
-
-        const boxType = draggableId as TBoxType;
-        const isMovingInCanvas = source.droppableId === CALCULATOR_DROPPABLE_ID;
-        if (!items.includes(boxType) || isMovingInCanvas) {
-            const newItems = [...items];
-            if (isMovingInCanvas) newItems.splice(source.index, 1);
-            newItems.splice(destination.index, 0, boxType);
-
-            const displayItem = 'display';
-            const displayPosition = newItems.indexOf(displayItem);
-            if (displayPosition > 0) {
-                newItems.splice(displayPosition, 1);
-                newItems.unshift(displayItem);
-            }
-
-            setItems(newItems);
-        }
-    };
+    const onDragEnd = useDragAndDrop(items, setItems);
 
     return (
         <div className={classNames('container', { container_mode_runtime: mode === Mode.runtime })}>
-            <DragDropWrapper onDragEnd={handleOnDragEnd}>
+            <DragDropWrapper onDragEnd={onDragEnd}>
                 <div className="aside">
                     <Sidebar items={items} />
                 </div>
